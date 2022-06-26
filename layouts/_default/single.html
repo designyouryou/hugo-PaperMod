@@ -36,8 +36,30 @@
   {{- end }}
 
   <footer class="post-footer">
+    <hr style="color:#a9a9a9">
+    {{- $series := .Language.Params.Taxonomies.tag | default "series" }}
+    <ul class="post-tags">
+      {{- range first 1 ($.GetTerms $series) }}
+      <li>In series </li>
+      {{- end }}
+      {{- range ($.GetTerms $series) }}
+      <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
+      {{- end }}
+    </ul>
+    {{- $categories := .Language.Params.Taxonomies.tag | default "categories" }}
+    <ul class="post-tags">
+      {{- range first 1 ($.GetTerms $categories) }}
+      <li>Categorized in </li>
+      {{- end }}
+      {{- range ($.GetTerms $categories) }}
+      <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
+      {{- end }}
+    </ul>
     {{- $tags := .Language.Params.Taxonomies.tag | default "tags" }}
     <ul class="post-tags">
+      {{- range first 1 ($.GetTerms $tags) }}
+      <li>Tagged </li>
+      {{- end }}
       {{- range ($.GetTerms $tags) }}
       <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
       {{- end }}

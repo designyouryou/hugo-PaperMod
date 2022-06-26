@@ -7,7 +7,7 @@
 {{- if not .IsHome | and .Title }}
 <header class="page-header">
   {{- partial "breadcrumbs.html" . }}
-  <h1>
+  <h1>View Posts in   
     {{ .Title }}
     {{- if and (or (eq .Kind `term`) (eq .Kind `section`)) (.Param "ShowRssButtonInSectionTermList") }}
     <a href="index.xml" title="RSS" aria-label="RSS">
@@ -44,9 +44,12 @@
 
 {{- $paginator := .Paginate $pages }}
 
+
 {{- if and .IsHome site.Params.homeInfoParams (eq $paginator.PageNumber 1) }}
 {{- partial "home_info.html" . }}
+<h2>From the Blog</h2><br />
 {{- end }}
+
 
 {{- $term := .Data.Term }}
 {{- range $index, $page := $paginator.Pages }}
@@ -59,6 +62,7 @@
 {{- else if $term }}
 {{- $class = "post-entry tag-entry" }}
 {{- end }}
+
 
 <article class="{{ $class }}">
   {{- $isHidden := (site.Params.cover.hidden | default site.Params.cover.hiddenInList) }}
@@ -83,6 +87,7 @@
 </article>
 {{- end }}
 
+{{- if not .IsHome }}
 {{- if gt $paginator.TotalPages 1 }}
 <footer class="page-footer">
   <nav class="pagination">
@@ -91,6 +96,15 @@
     {{- end }}
     {{- if $paginator.HasNext }}
     <a class="next" href="{{ $paginator.Next.URL | absURL }}">{{ i18n "next_page" }} »</a>
+    {{- end }}
+  </nav>
+</footer>
+{{- end }}
+{{- else }}
+<footer class="page-footer">
+  <nav class="pagination">
+    {{- if $paginator.HasNext }}
+    <a class="prev" style="margin: 0 auto;" href="/blog/">Visit the Blog</a>
     {{- end }}
   </nav>
 </footer>

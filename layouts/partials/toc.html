@@ -4,7 +4,7 @@
 <div class="toc">
     <details {{if (.Param "TocOpen") }} open{{ end }}>
         <summary accesskey="c" title="(Alt + C)">
-            <span class="details">{{- i18n "toc" | default "Table of Contents" }}</span>
+            <span class="details" style="font-weight: 600;">{{- i18n "toc" | default "Table of Contents" }}</span>
         </summary>
 
         <div class="inner">
@@ -23,9 +23,9 @@
             {{- $firstHeaderLevel := len (seq (index (findRE "[1-6]" (index $headers 0) 1) 0)) -}}
 
             {{- $.Scratch.Set "bareul" slice -}}
-            <ul>
+            <ul style="list-style-type: none;">
                 {{- range seq (sub $firstHeaderLevel $largest) -}}
-                <ul>
+                <ul style="list-style-type: none;">
                     {{- $.Scratch.Add "bareul" (sub (add $largest .) 1) -}}
                     {{- end -}}
                     {{- range $i, $header := $headers -}}
@@ -44,7 +44,7 @@
                     {{- $prevHeaderLevel := len (seq $prevHeaderLevel) -}}
                     {{- if gt $headerLevel $prevHeaderLevel -}}
                     {{- range seq $prevHeaderLevel (sub $headerLevel 1) -}}
-                    <ul>
+                    <ul style="list-style-type: none;">
                         {{/* the first should not be recorded */}}
                         {{- if ne $prevHeaderLevel . -}}
                         {{- $.Scratch.Add "bareul" . -}}
