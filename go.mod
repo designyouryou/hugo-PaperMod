@@ -1,3 +1,3 @@
-module github.com/landonjefftaylor/hugo-PaperMod
+module github.com/designyouryou/hugo-PaperMod
 
 go 1.12
